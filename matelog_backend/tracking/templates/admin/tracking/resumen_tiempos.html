@@ -1,0 +1,192 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% load tracking_filters %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block extrastyle %}
+<style>
+    .filtros-container {
+        background: #f8f8f8;
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .filtros-container form {
+        display: flex;
+        gap: 10px;
+        align-items: flex-end;
+    }
+
+    .filtros-container .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .filtros-container label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .filtros-container select {
+        padding: 6px 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        min-width: 200px;
+    }
+
+    .filtros-container button {
+        padding: 7px 15px;
+        background: #417690;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .filtros-container button:hover {
+        background: #205067;
+    }
+
+    .exportar-buttons {
+        margin-bottom: 15px;
+    }
+
+    .exportar-buttons a {
+        display: inline-block;
+        padding: 8px 15px;
+        margin-right: 10px;
+        background: #28a745;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    .exportar-buttons a:hover {
+        background: #218838;
+    }
+
+    .matriz-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .matriz-table th {
+        background: #417690;
+        color: white;
+        padding: 12px 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+        font-weight: bold;
+    }
+
+    .matriz-table td {
+        padding: 10px 8px;
+        border: 1px solid #ddd;
+    }
+
+    .matriz-table tbody tr:hover {
+        background: #f5f5f5;
+    }
+
+    .matriz-table tfoot td {
+        background: #e8f4f8;
+        font-weight: bold;
+        border-top: 2px solid #417690;
+    }
+
+    .numero-columna {
+        text-align: right;
+    }
+
+    .alert-info {
+        background: #d1ecf1;
+        border: 1px solid #bee5eb;
+        color: #0c5460;
+        padding: 12px 15px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<div class="filtros-container">
+    <form method="get">
+        <div class="form-group">
+            <label for="tema">Filtrar por Tema:</label>
+            <select name="tema" id="tema">
+                <option value="">-- Selecciona un tema --</option>
+                {% for tema in temas %}
+                <option value="{{ tema.id }}" {% if tema_seleccionado and tema.id == tema_seleccionado.id %}selected{% endif %}>
+                    {{ tema.leccion.titulo }} - {{ tema.titulo }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit">Filtrar</button>
+    </form>
+</div>
+
+{% if tema_seleccionado %}
+<div class="alert-info">
+    <strong>Tema seleccionado:</strong> {{ tema_seleccionado.leccion.titulo }} - {{ tema_seleccionado.titulo }}
+</div>
+
+{% if datos_usuarios %}
+<div class="exportar-buttons">
+    <a href="?tema={{ tema_seleccionado.id }}&exportar=csv">📄 Exportar CSV</a>
+    <a href="?tema={{ tema_seleccionado.id }}&exportar=excel">📊 Exportar Excel</a>
+</div>
+
+<table class="matriz-table">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            {% for contenido in contenidos_estructura %}
+            <th class="numero-columna">{{ contenido.nombre }}</th>
+            {% endfor %}
+            <th class="numero-columna">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for usuario in datos_usuarios %}
+        <tr>
+            <td><strong>{{ usuario.usuario }}</strong></td>
+            {% for segundos in usuario.contenidos_lista %}
+            <td class="numero-columna">{{ segundos }} seg</td>
+            {% endfor %}
+            <td class="numero-columna"><strong>{{ usuario.total }} seg</strong></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td><strong>TOTAL</strong></td>
+            {% for total in totales_lista %}
+            <td class="numero-columna">{{ total }} seg</td>
+            {% endfor %}
+            <td class="numero-columna"><strong>{{ total_general }} seg</strong></td>
+        </tr>
+    </tfoot>
+</table>
+
+{% else %}
+<div class="alert-info">
+    No hay datos de tiempo para este tema.
+</div>
+{% endif %}
+
+{% else %}
+<div class="alert-info">
+    Selecciona un tema para ver el resumen de tiempos por pantalla.
+</div>
+{% endif %}
+
+{% endblock %}

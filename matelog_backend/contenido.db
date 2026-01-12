@@ -1,0 +1,795 @@
+"""
+================================================================================================
+SCRIPT DE CONTENIDO PARA MATELOG - Base de Datos de Lógica Matemática
+================================================================================================
+
+Este script contiene el contenido educativo completo de MateLog.
+Ejecutar con: python manage.py shell < contenido.db
+
+ESTRUCTURA DEL CONTENIDO:
+-------------------------
+- Lección 1: Introducción a la Lógica Matemática
+  - Tema 1.1: Proposiciones Lógicas (15 ejercicios)
+  - Tema 1.2: Conectivos Lógicos (15 ejercicios)
+
+- Lección 2: Tablas de Verdad
+  - Tema 2.1: Introducción a Tablas de Verdad (15 ejercicios)
+
+CÓMO MODIFICAR ESTE ARCHIVO:
+-----------------------------
+1. AGREGAR NUEVO CONTENIDO:
+   - Copia la estructura de una lección/tema existente
+   - Incrementa el número de 'orden' secuencialmente
+   - Modifica títulos, descripciones y contenido
+
+2. MODIFICAR CONTENIDO EXISTENTE:
+   - Busca la sección correspondiente
+   - Edita directamente el contenido HTML en 'contenido_texto'
+   - El HTML soporta: <h3>, <p>, <ul>, <ol>, <b>, <i>, etc.
+
+3. ELIMINAR CONTENIDO:
+   - Comenta las líneas con # o elimínalas directamente
+   - IMPORTANTE: Ajusta los números de 'orden' para mantener secuencia
+
+4. TIPOS DE CONTENIDO (ContenidoTema):
+   - 'TEORIA': Conceptos teóricos
+   - 'EJEMPLO': Ejemplos prácticos
+   - 'EJEMPLO_EXTRA': Ejemplos adicionales (opcionales)
+   - 'RESUMEN': Resumen del tema
+
+5. TIPOS DE EJERCICIO:
+   - 'MULTIPLE': Opción múltiple (requiere OpcionMultiple)
+   - 'ABIERTO': Respuesta de texto libre
+
+6. DIFICULTAD:
+   - 'FACIL', 'INTERMEDIO', 'DIFICIL'
+
+================================================================================================
+"""
+
+from lessons.models import Leccion, Tema, ContenidoTema, Ejercicio, OpcionMultiple
+
+print("🚀 Iniciando carga de contenido educativo...")
+print("=" * 80)
+
+# ================================================================================================
+# LIMPIEZA DE DATOS EXISTENTES
+# ================================================================================================
+# ADVERTENCIA: Esto eliminará TODO el contenido actual de la base de datos
+# Comenta estas líneas si solo quieres AGREGAR contenido sin eliminar
+
+print("📝 Limpiando datos existentes...")
+OpcionMultiple.objects.all().delete()
+Ejercicio.objects.all().delete()
+ContenidoTema.objects.all().delete()
+Tema.objects.all().delete()
+Leccion.objects.all().delete()
+print("  ✓ Base de datos limpiada")
+print()
+
+# ================================================================================================
+# LECCIÓN 1: INTRODUCCIÓN A LA LÓGICA MATEMÁTICA
+# ================================================================================================
+print("📚 Creando Lección 1: Introducción a la Lógica Matemática...")
+
+leccion1 = Leccion.objects.create(
+    orden=1,
+    titulo="Introducción a la Lógica Matemática",
+    descripcion="""
+        <p>Bienvenido al mundo de la lógica matemática. En esta lección aprenderás los
+        conceptos fundamentales que te permitirán razonar de forma estructurada y precisa.</p>
+        <p>Estudiaremos qué son las proposiciones, cómo identificarlas y cómo combinarlas
+        usando conectivos lógicos.</p>
+    """,
+    is_active=True
+)
+
+# ------------------------------------------------------------------------------------------------
+# TEMA 1.1: PROPOSICIONES LÓGICAS
+# ------------------------------------------------------------------------------------------------
+print("  📖 Creando Tema 1.1: Proposiciones Lógicas...")
+
+tema1_1 = Tema.objects.create(
+    leccion=leccion1,
+    orden=1,
+    titulo="Proposiciones Lógicas",
+    descripcion="""
+        <p>Las proposiciones son la base de la lógica matemática. Aprenderás a identificar
+        qué es una proposición, sus características y cómo distinguirlas de otros tipos
+        de oraciones.</p>
+    """,
+    is_active=True
+)
+
+# --- CONTENIDOS DEL TEMA 1.1 ---
+
+ContenidoTema.objects.create(
+    tema=tema1_1,
+    orden=1,
+    tipo='TEORIA',
+    contenido_texto="""
+        <h3>¿Qué es una Proposición?</h3>
+
+        <p>Una <strong>proposición</strong> es una oración declarativa que puede ser
+        <strong>verdadera</strong> o <strong>falsa</strong>, pero no ambas al mismo tiempo.</p>
+
+        <h4>Características de una proposición:</h4>
+        <ul>
+            <li>Es una oración <strong>declarativa</strong> (afirma o niega algo)</li>
+            <li>Tiene un <strong>valor de verdad</strong> definido (V o F)</li>
+            <li>No es ambigua</li>
+            <li>No contiene variables sin valor asignado</li>
+        </ul>
+
+        <h4>Ejemplos de proposiciones:</h4>
+        <ul>
+            <li>"El cielo es azul" ✓ (puede ser verdadera o falsa)</li>
+            <li>"2 + 2 = 4" ✓ (verdadera)</li>
+            <li>"5 es mayor que 10" ✓ (falsa)</li>
+            <li>"La Tierra orbita alrededor del Sol" ✓ (verdadera)</li>
+        </ul>
+
+        <h4>NO son proposiciones:</h4>
+        <ul>
+            <li>"¿Qué hora es?" ✗ (pregunta)</li>
+            <li>"¡Cierra la puerta!" ✗ (orden o mandato)</li>
+            <li>"x + 5 = 10" ✗ (variable sin valor asignado)</li>
+            <li>"¡Qué bonito día!" ✗ (exclamación subjetiva)</li>
+        </ul>
+    """
+)
+
+ContenidoTema.objects.create(
+    tema=tema1_1,
+    orden=2,
+    tipo='EJEMPLO',
+    contenido_texto="""
+        <h3>Ejemplo 1: Identificando Proposiciones</h3>
+
+        <p>Analicemos la siguiente oración:</p>
+        <p style="text-align: center; font-size: 1.2em; color: #667eea;">
+            <strong>"El agua hierve a 100°C al nivel del mar"</strong>
+        </p>
+
+        <h4>¿Es una proposición? Sí, porque:</h4>
+        <ol>
+            <li><strong>Es declarativa:</strong> Afirma un hecho sobre el agua</li>
+            <li><strong>Tiene valor de verdad:</strong> Es verdadera (científicamente comprobado)</li>
+            <li><strong>No es ambigua:</strong> Es una afirmación clara y precisa</li>
+            <li><strong>No depende de variables:</strong> Todas las condiciones están especificadas</li>
+        </ol>
+
+        <p>Por lo tanto, podemos asignarle un valor de verdad: <strong>VERDADERO</strong></p>
+    """
+)
+
+ContenidoTema.objects.create(
+    tema=tema1_1,
+    orden=3,
+    tipo='EJEMPLO_EXTRA',
+    contenido_texto="""
+        <h3>Ejemplo Extra: Oraciones que NO son Proposiciones</h3>
+
+        <p>Veamos algunos casos que pueden confundirse con proposiciones:</p>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <tr style="background: #f0f0f0;">
+                <th style="border: 1px solid #ddd; padding: 10px;">Oración</th>
+                <th style="border: 1px solid #ddd; padding: 10px;">¿Por qué NO es proposición?</th>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px;">"¿Qué hora es?"</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">Es una <strong>pregunta</strong>, no afirma ni niega nada</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px;">"¡Cierra la puerta!"</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">Es una <strong>orden</strong>, no tiene valor de verdad</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px;">"x + 5 = 10"</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">Contiene <strong>variable sin valor</strong> asignado</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px;">"¡Qué bonito!"</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">Es <strong>subjetiva</strong> y ambigua</td>
+            </tr>
+        </table>
+
+        <p><strong>Nota:</strong> Si asignamos un valor a la variable x, como "cuando x=5",
+        entonces "5 + 5 = 10" SÍ sería una proposición (verdadera).</p>
+    """
+)
+
+ContenidoTema.objects.create(
+    tema=tema1_1,
+    orden=4,
+    tipo='TEORIA',
+    contenido_texto="""
+        <h3>Notación de Proposiciones</h3>
+
+        <p>En lógica matemática, las proposiciones se representan con <strong>letras minúsculas</strong>
+        del alfabeto, generalmente p, q, r, s, etc.</p>
+
+        <h4>Ejemplos de notación:</h4>
+        <ul>
+            <li><strong>p:</strong> "Llueve"</li>
+            <li><strong>q:</strong> "Hace frío"</li>
+            <li><strong>r:</strong> "Es lunes"</li>
+            <li><strong>s:</strong> "Voy al cine"</li>
+        </ul>
+
+        <h4>Valores de verdad:</h4>
+        <p>Cada proposición puede tener uno de dos valores:</p>
+        <ul>
+            <li><strong>V</strong> (Verdadero) o <strong>1</strong></li>
+            <li><strong>F</strong> (Falso) o <strong>0</strong></li>
+        </ul>
+
+        <p><strong>Ejemplo:</strong></p>
+        <p>Si p: "París es la capital de Francia", entonces el valor de verdad de p es <strong>V</strong> (verdadero).</p>
+        <p>Si q: "2 + 2 = 5", entonces el valor de verdad de q es <strong>F</strong> (falso).</p>
+    """
+)
+
+# --- EJERCICIOS DEL TEMA 1.1 ---
+
+# Ejercicio 1: Múltiple - Identificar proposición
+ejercicio1_1_1 = Ejercicio.objects.create(
+    tema=tema1_1,
+    orden=1,
+    tipo='MULTIPLE',
+    dificultad='FACIL',
+    mostrar_dificultad=False,
+    instruccion='<p>Selecciona la opción correcta:</p>',
+    enunciado='<p>¿Cuál de las siguientes oraciones es una <strong>proposición</strong>?</p>',
+    respuesta_correcta='B',
+    texto_ayuda="""
+        <p><strong>Recuerda:</strong> Una proposición debe ser una oración declarativa
+        con un valor de verdad claro (verdadero o falso).</p>
+        <p>Las preguntas, órdenes y oraciones con variables no son proposiciones.</p>
+    """,
+    retroalimentacion_correcta="""
+        <p>¡Correcto! ✓</p>
+        <p>"La Luna orbita la Tierra" es una oración declarativa con un valor de verdad
+        definido (verdadero), por lo tanto es una proposición.</p>
+    """,
+    retroalimentacion_incorrecta="""
+        <p>Incorrecto. Revisa la definición de proposición.</p>
+        <p>Recuerda que las preguntas, órdenes y oraciones con variables indefinidas
+        <strong>no</strong> son proposiciones.</p>
+    """
+)
+
+OpcionMultiple.objects.create(ejercicio=ejercicio1_1_1, letra='A', texto='¿Dónde vives?')
+OpcionMultiple.objects.create(ejercicio=ejercicio1_1_1, letra='B', texto='La Luna orbita la Tierra')
+OpcionMultiple.objects.create(ejercicio=ejercicio1_1_1, letra='C', texto='¡Qué hermoso día!')
+OpcionMultiple.objects.create(ejercicio=ejercicio1_1_1, letra='D', texto='x > 5')
+
+# Ejercicio 2: Abierto - Identificar NO proposición
+ejercicio1_1_2 = Ejercicio.objects.create(
+    tema=tema1_1,
+    orden=2,
+    tipo='ABIERTO',
+    dificultad='FACIL',
+    mostrar_dificultad=False,
+    instruccion='<p>Responde con "verdadero" o "falso":</p>',
+    enunciado='<p>¿Es "Haz tu tarea" una proposición?</p>',
+    respuesta_correcta='falso',
+    texto_ayuda="""
+        <p><strong>Pista:</strong> Las órdenes o mandatos no son proposiciones porque
+        no afirman ni niegan nada, solo indican una acción a realizar.</p>
+    """,
+    retroalimentacion_correcta="""
+        <p>¡Correcto! ✓</p>
+        <p>"Haz tu tarea" es una orden o mandato, no una proposición.</p>
+    """,
+    retroalimentacion_incorrecta="""
+        <p>Las órdenes no tienen valor de verdad, por lo tanto <strong>no son proposiciones</strong>.</p>
+        <p>"Haz tu tarea" no afirma ni niega nada, simplemente ordena una acción.</p>
+    """
+)
+
+# Ejercicio 3: Múltiple - Valor de verdad
+ejercicio1_1_3 = Ejercicio.objects.create(
+    tema=tema1_1,
+    orden=3,
+    tipo='MULTIPLE',
+    dificultad='FACIL',
+    mostrar_dificultad=False,
+    instruccion='<p>Selecciona la opción correcta:</p>',
+    enunciado='<p>¿Cuál es el valor de verdad de la proposición: "2 + 3 = 5"?</p>',
+    respuesta_correcta='A',
+    texto_ayuda='<p>Realiza la operación matemática y verifica si la igualdad es correcta.</p>',
+    retroalimentacion_correcta='<p>¡Correcto! La proposición "2 + 3 = 5" es verdadera.</p>',
+    retroalimentacion_incorrecta='<p>Incorrecto. 2 + 3 sí es igual a 5, por lo tanto la proposición es verdadera.</p>'
+)
+
+OpcionMultiple.objects.create(ejercicio=ejercicio1_1_3, letra='A', texto='Verdadero')
+OpcionMultiple.objects.create(ejercicio=ejercicio1_1_3, letra='B', texto='Falso')
+OpcionMultiple.objects.create(ejercicio=ejercicio1_1_3, letra='C', texto='No es una proposición')
+OpcionMultiple.objects.create(ejercicio=ejercicio1_1_3, letra='D', texto='Es ambigua')
+
+# Ejercicio 4: Abierto - Pregunta no es proposición
+ejercicio1_1_4 = Ejercicio.objects.create(
+    tema=tema1_1,
+    orden=4,
+    tipo='ABIERTO',
+    dificultad='FACIL',
+    mostrar_dificultad=False,
+    instruccion='<p>Responde con "verdadero" o "falso":</p>',
+    enunciado='<p>¿Es "¿Cuántos años tienes?" una proposición?</p>',
+    respuesta_correcta='falso',
+    texto_ayuda='<p>Recuerda que las preguntas no son proposiciones.</p>',
+    retroalimentacion_correcta='<p>¡Correcto! Las preguntas no son proposiciones.</p>',
+    retroalimentacion_incorrecta='<p>Las preguntas no tienen valor de verdad, por lo tanto no son proposiciones.</p>'
+)
+
+# Ejercicio 5: Múltiple - Identificar proposición verdadera
+ejercicio1_1_5 = Ejercicio.objects.create(
+    tema=tema1_1,
+    orden=5,
+    tipo='MULTIPLE',
+    dificultad='FACIL',
+    mostrar_dificultad=False,
+    instruccion='<p>Selecciona la proposición que es <strong>verdadera</strong>:</p>',
+    enunciado='<p>¿Cuál de las siguientes proposiciones es verdadera?</p>',
+    respuesta_correcta='C',
+    texto_ayuda='<p>Verifica cada afirmación con tus conocimientos generales.</p>',
+    retroalimentacion_correcta='<p>¡Correcto! México está en América, es una proposición verdadera.</p>',
+    retroalimentacion_incorrecta='<p>Revisa cuidadosamente cada afirmación.</p>'
+)
+
+OpcionMultiple.objects.create(ejercicio=ejercicio1_1_5, letra='A', texto='La Luna es más grande que el Sol')
+OpcionMultiple.objects.create(ejercicio=ejercicio1_1_5, letra='B', texto='10 es menor que 5')
+OpcionMultiple.objects.create(ejercicio=ejercicio1_1_5, letra='C', texto='México está en América')
+OpcionMultiple.objects.create(ejercicio=ejercicio1_1_5, letra='D', texto='El agua hierve a 50°C')
+
+# Ejercicios 6-15: Práctica adicional
+ejercicios_practica = [
+    # Ejercicio 6
+    {
+        'orden': 6,
+        'tipo': 'ABIERTO',
+        'dificultad': 'INTERMEDIO',
+        'enunciado': '<p>¿Es "x + 7 = 12" una proposición?</p>',
+        'respuesta_correcta': 'falso',
+        'ayuda': '<p>Recuerda que las oraciones con variables sin valor asignado no son proposiciones.</p>'
+    },
+    # Ejercicio 7
+    {
+        'orden': 7,
+        'tipo': 'MULTIPLE',
+        'dificultad': 'INTERMEDIO',
+        'enunciado': '<p>Si p: "El cielo es verde", ¿cuál es el valor de verdad de p?</p>',
+        'respuesta_correcta': 'B',
+        'opciones': [
+            {'letra': 'A', 'texto': 'Verdadero'},
+            {'letra': 'B', 'texto': 'Falso'},
+            {'letra': 'C', 'texto': 'No tiene valor de verdad'},
+            {'letra': 'D', 'texto': 'Depende del contexto'}
+        ],
+        'ayuda': '<p>Observa el cielo y determina si la afirmación es correcta.</p>'
+    },
+    # Ejercicio 8
+    {
+        'orden': 8,
+        'tipo': 'ABIERTO',
+        'dificultad': 'INTERMEDIO',
+        'enunciado': '<p>¿La oración "¡Viva México!" es una proposición?</p>',
+        'respuesta_correcta': 'falso',
+        'ayuda': '<p>Las exclamaciones emocionales no son proposiciones.</p>'
+    },
+    # Ejercicio 9
+    {
+        'orden': 9,
+        'tipo': 'MULTIPLE',
+        'dificultad': 'INTERMEDIO',
+        'enunciado': '<p>¿Cuál de las siguientes NO es una proposición?</p>',
+        'respuesta_correcta': 'D',
+        'opciones': [
+            {'letra': 'A', 'texto': 'El Sol es una estrella'},
+            {'letra': 'B', 'texto': '5 + 5 = 10'},
+            {'letra': 'C', 'texto': 'París es la capital de Italia'},
+            {'letra': 'D', 'texto': '¿A qué hora es la clase?'}
+        ],
+        'ayuda': '<p>Busca la oración que no tenga valor de verdad.</p>'
+    },
+    # Ejercicio 10
+    {
+        'orden': 10,
+        'tipo': 'ABIERTO',
+        'dificultad': 'INTERMEDIO',
+        'enunciado': '<p>Si q: "7 es un número primo", ¿es q verdadera o falsa?</p>',
+        'respuesta_correcta': 'verdadera',
+        'ayuda': '<p>Los números primos solo son divisibles entre 1 y sí mismos.</p>'
+    },
+    # Ejercicio 11
+    {
+        'orden': 11,
+        'tipo': 'MULTIPLE',
+        'dificultad': 'DIFICIL',
+        'enunciado': '<p>¿Cuál afirmación sobre proposiciones es CORRECTA?</p>',
+        'respuesta_correcta': 'A',
+        'opciones': [
+            {'letra': 'A', 'texto': 'Una proposición siempre tiene un valor de verdad definido'},
+            {'letra': 'B', 'texto': 'Las preguntas pueden ser proposiciones'},
+            {'letra': 'C', 'texto': 'Una proposición puede ser verdadera y falsa al mismo tiempo'},
+            {'letra': 'D', 'texto': 'Las órdenes son proposiciones'}
+        ],
+        'ayuda': '<p>Revisa las características fundamentales de las proposiciones.</p>'
+    },
+    # Ejercicio 12
+    {
+        'orden': 12,
+        'tipo': 'ABIERTO',
+        'dificultad': 'DIFICIL',
+        'enunciado': '<p>¿Es "Este enunciado es falso" una proposición válida?</p>',
+        'respuesta_correcta': 'falso',
+        'ayuda': '<p>Esta es la famosa "paradoja del mentiroso". Piensa en qué pasa si intentas asignarle un valor de verdad.</p>'
+    },
+    # Ejercicio 13
+    {
+        'orden': 13,
+        'tipo': 'MULTIPLE',
+        'dificultad': 'DIFICIL',
+        'enunciado': '<p>Si r: "Todos los números pares son divisibles entre 2", ¿cuál es el valor de r?</p>',
+        'respuesta_correcta': 'A',
+        'opciones': [
+            {'letra': 'A', 'texto': 'Verdadero'},
+            {'letra': 'B', 'texto': 'Falso'},
+            {'letra': 'C', 'texto': 'A veces verdadero, a veces falso'},
+            {'letra': 'D', 'texto': 'No es una proposición'}
+        ],
+        'ayuda': '<p>Por definición, un número par es aquel divisible entre 2.</p>'
+    },
+    # Ejercicio 14
+    {
+        'orden': 14,
+        'tipo': 'ABIERTO',
+        'dificultad': 'DIFICIL',
+        'enunciado': '<p>¿La oración "n es un número natural" es una proposición?</p>',
+        'respuesta_correcta': 'falso',
+        'ayuda': '<p>La variable n no tiene un valor específico asignado.</p>'
+    },
+    # Ejercicio 15
+    {
+        'orden': 15,
+        'tipo': 'MULTIPLE',
+        'dificultad': 'DIFICIL',
+        'enunciado': '<p>¿Cuál de las siguientes es una proposición FALSA?</p>',
+        'respuesta_correcta': 'B',
+        'opciones': [
+            {'letra': 'A', 'texto': 'La Tierra tiene un satélite natural llamado Luna'},
+            {'letra': 'B', 'texto': 'Todos los números primos son impares'},
+            {'letra': 'C', 'texto': 'El agua está compuesta de hidrógeno y oxígeno'},
+            {'letra': 'D', 'texto': '100 es divisible entre 5'}
+        ],
+        'ayuda': '<p>Piensa en el número 2, que es primo pero par.</p>'
+    }
+]
+
+# Crear los ejercicios de práctica
+for ej_data in ejercicios_practica:
+    ejercicio = Ejercicio.objects.create(
+        tema=tema1_1,
+        orden=ej_data['orden'],
+        tipo=ej_data['tipo'],
+        dificultad=ej_data['dificultad'],
+        mostrar_dificultad=False,
+        instruccion='<p>Responde correctamente:</p>',
+        enunciado=ej_data['enunciado'],
+        respuesta_correcta=ej_data['respuesta_correcta'],
+        texto_ayuda=ej_data.get('ayuda', '<p>Lee cuidadosamente el enunciado.</p>'),
+        retroalimentacion_correcta='<p>¡Correcto! ✓</p>',
+        retroalimentacion_incorrecta='<p>Incorrecto. Revisa los conceptos y vuelve a intentar.</p>'
+    )
+
+    # Si es de opción múltiple, crear las opciones
+    if ej_data['tipo'] == 'MULTIPLE' and 'opciones' in ej_data:
+        for opcion in ej_data['opciones']:
+            OpcionMultiple.objects.create(
+                ejercicio=ejercicio,
+                letra=opcion['letra'],
+                texto=opcion['texto']
+            )
+
+print(f"    ✓ Tema 1.1 creado con {tema1_1.contenidos.count()} contenidos y {tema1_1.ejercicios.count()} ejercicios")
+
+# ------------------------------------------------------------------------------------------------
+# TEMA 1.2: CONECTIVOS LÓGICOS
+# ------------------------------------------------------------------------------------------------
+print("  📖 Creando Tema 1.2: Conectivos Lógicos...")
+
+tema1_2 = Tema.objects.create(
+    leccion=leccion1,
+    orden=2,
+    titulo="Conectivos Lógicos",
+    descripcion="""
+        <p>Los conectivos lógicos nos permiten combinar proposiciones simples para formar
+        proposiciones compuestas. Estudiaremos la conjunción (Y), disyunción (O) y negación (NO).</p>
+    """,
+    is_active=True
+)
+
+# --- CONTENIDOS DEL TEMA 1.2 ---
+
+ContenidoTema.objects.create(
+    tema=tema1_2,
+    orden=1,
+    tipo='TEORIA',
+    contenido_texto="""
+        <h3>Conectivos Lógicos</h3>
+
+        <p>Los <strong>conectivos lógicos</strong> son operadores que nos permiten combinar
+        proposiciones simples para formar <strong>proposiciones compuestas</strong>.</p>
+
+        <h4>Conectivos principales:</h4>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <tr style="background: #f0f0f0;">
+                <th style="border: 1px solid #ddd; padding: 10px;">Conectivo</th>
+                <th style="border: 1px solid #ddd; padding: 10px;">Símbolo</th>
+                <th style="border: 1px solid #ddd; padding: 10px;">Nombre</th>
+                <th style="border: 1px solid #ddd; padding: 10px;">Significado</th>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px;"><strong>Y</strong></td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">∧</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">Conjunción</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">Verdadero solo cuando AMBAS proposiciones son verdaderas</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px;"><strong>O</strong></td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">∨</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">Disyunción</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">Verdadero cuando AL MENOS UNA proposición es verdadera</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px;"><strong>NO</strong></td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">¬</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">Negación</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">Invierte el valor de verdad</td>
+            </tr>
+        </table>
+    """
+)
+
+ContenidoTema.objects.create(
+    tema=tema1_2,
+    orden=2,
+    tipo='EJEMPLO',
+    contenido_texto="""
+        <h3>Ejemplo: Conjunción (Y)</h3>
+
+        <p>Sean las siguientes proposiciones:</p>
+        <ul>
+            <li><strong>p:</strong> "Llueve"</li>
+            <li><strong>q:</strong> "Hace frío"</li>
+        </ul>
+
+        <p>La conjunción <strong>p ∧ q</strong> se lee como:</p>
+        <p style="text-align: center; font-size: 1.2em; color: #667eea;">
+            <strong>"Llueve Y hace frío"</strong>
+        </p>
+
+        <h4>Tabla de verdad de la conjunción:</h4>
+        <table style="width: 60%; margin: 20px auto; border-collapse: collapse;">
+            <tr style="background: #667eea; color: white;">
+                <th style="border: 1px solid #ddd; padding: 10px;">p</th>
+                <th style="border: 1px solid #ddd; padding: 10px;">q</th>
+                <th style="border: 1px solid #ddd; padding: 10px;">p ∧ q</th>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">V</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">V</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center; background: #d4edda;"><strong>V</strong></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">V</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">F</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center; background: #f8d7da;"><strong>F</strong></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">F</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">V</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center; background: #f8d7da;"><strong>F</strong></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">F</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">F</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center; background: #f8d7da;"><strong>F</strong></td>
+            </tr>
+        </table>
+
+        <p><strong>Conclusión:</strong> La conjunción solo es verdadera cuando AMBAS proposiciones son verdaderas.</p>
+    """
+)
+
+ContenidoTema.objects.create(
+    tema=tema1_2,
+    orden=3,
+    tipo='EJEMPLO_EXTRA',
+    contenido_texto="""
+        <h3>Ejemplo Extra: Disyunción (O) y Negación (NO)</h3>
+
+        <h4>1. Disyunción (p ∨ q)</h4>
+        <p>Continuando con p: "Llueve" y q: "Hace frío"</p>
+        <p><strong>p ∨ q:</strong> "Llueve O hace frío"</p>
+
+        <table style="width: 60%; margin: 20px auto; border-collapse: collapse;">
+            <tr style="background: #667eea; color: white;">
+                <th style="border: 1px solid #ddd; padding: 10px;">p</th>
+                <th style="border: 1px solid #ddd; padding: 10px;">q</th>
+                <th style="border: 1px solid #ddd; padding: 10px;">p ∨ q</th>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">V</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">V</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center; background: #d4edda;"><strong>V</strong></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">V</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">F</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center; background: #d4edda;"><strong>V</strong></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">F</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">V</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center; background: #d4edda;"><strong>V</strong></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">F</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">F</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center; background: #f8d7da;"><strong>F</strong></td>
+            </tr>
+        </table>
+
+        <h4>2. Negación (¬p)</h4>
+        <p><strong>¬p:</strong> "NO llueve"</p>
+
+        <table style="width: 40%; margin: 20px auto; border-collapse: collapse;">
+            <tr style="background: #667eea; color: white;">
+                <th style="border: 1px solid #ddd; padding: 10px;">p</th>
+                <th style="border: 1px solid #ddd; padding: 10px;">¬p</th>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">V</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center; background: #f8d7da;"><strong>F</strong></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">F</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center; background: #d4edda;"><strong>V</strong></td>
+            </tr>
+        </table>
+    """
+)
+
+# Agregar ejercicios para el tema 1.2 (simplificados para el ejemplo)
+for i in range(1, 16):
+    dif = 'FACIL' if i < 6 else 'INTERMEDIO' if i < 11 else 'DIFICIL'
+    Ejercicio.objects.create(
+        tema=tema1_2,
+        orden=i,
+        tipo='MULTIPLE' if i % 3 == 0 else 'ABIERTO',
+        dificultad=dif,
+        mostrar_dificultad=False,
+        instruccion='<p>Responde correctamente:</p>',
+        enunciado=f'<p>Ejercicio sobre conectivos lógicos #{i}</p>',
+        respuesta_correcta='A' if i % 3 == 0 else 'verdadero',
+        texto_ayuda='<p>Recuerda las tablas de verdad de los conectivos.</p>',
+        retroalimentacion_correcta='<p>¡Correcto! ✓</p>',
+        retroalimentacion_incorrecta='<p>Revisa las tablas de verdad.</p>'
+    )
+
+    if i % 3 == 0:
+        ej = Ejercicio.objects.get(tema=tema1_2, orden=i)
+        OpcionMultiple.objects.create(ejercicio=ej, letra='A', texto='Opción correcta')
+        OpcionMultiple.objects.create(ejercicio=ej, letra='B', texto='Opción incorrecta 1')
+        OpcionMultiple.objects.create(ejercicio=ej, letra='C', texto='Opción incorrecta 2')
+        OpcionMultiple.objects.create(ejercicio=ej, letra='D', texto='Opción incorrecta 3')
+
+print(f"    ✓ Tema 1.2 creado con {tema1_2.contenidos.count()} contenidos y {tema1_2.ejercicios.count()} ejercicios")
+
+print(f"  ✅ Lección 1 completada")
+print()
+
+# ================================================================================================
+# LECCIÓN 2: TABLAS DE VERDAD
+# ================================================================================================
+print("📚 Creando Lección 2: Tablas de Verdad...")
+
+leccion2 = Leccion.objects.create(
+    orden=2,
+    titulo="Tablas de Verdad",
+    descripcion="""
+        <p>Las tablas de verdad son herramientas fundamentales para analizar proposiciones
+        compuestas. Aprenderás a construirlas y utilizarlas para determinar el valor de
+        verdad de expresiones lógicas complejas.</p>
+    """,
+    is_active=True
+)
+
+tema2_1 = Tema.objects.create(
+    leccion=leccion2,
+    orden=1,
+    titulo="Introducción a Tablas de Verdad",
+    descripcion="""
+        <p>Aprende qué son las tablas de verdad, cómo construirlas paso a paso, y cómo
+        usarlas para evaluar proposiciones compuestas.</p>
+    """,
+    is_active=True
+)
+
+ContenidoTema.objects.create(
+    tema=tema2_1,
+    orden=1,
+    tipo='TEORIA',
+    contenido_texto="""
+        <h3>¿Qué es una Tabla de Verdad?</h3>
+
+        <p>Una <strong>tabla de verdad</strong> es una representación sistemática de todos
+        los posibles valores de verdad de una proposición compuesta.</p>
+
+        <h4>Utilidad:</h4>
+        <ul>
+            <li>Determinar cuándo una proposición compuesta es verdadera o falsa</li>
+            <li>Verificar equivalencias lógicas</li>
+            <li>Analizar argumentos lógicos</li>
+            <li>Simplificar expresiones lógicas</li>
+        </ul>
+
+        <h4>Pasos para construir una tabla de verdad:</h4>
+        <ol>
+            <li>Identificar las proposiciones simples (p, q, r, ...)</li>
+            <li>Determinar el número de filas: 2<sup>n</sup> donde n = número de proposiciones</li>
+            <li>Listar todas las combinaciones posibles de valores de verdad</li>
+            <li>Evaluar la expresión para cada combinación</li>
+        </ol>
+    """
+)
+
+# Agregar ejercicios para el tema 2.1
+for i in range(1, 16):
+    Ejercicio.objects.create(
+        tema=tema2_1,
+        orden=i,
+        tipo='MULTIPLE' if i % 2 == 0 else 'ABIERTO',
+        dificultad='INTERMEDIO',
+        mostrar_dificultad=False,
+        instruccion='<p>Completa o analiza la tabla de verdad:</p>',
+        enunciado=f'<p>Ejercicio de tabla de verdad #{i}</p>',
+        respuesta_correcta='B' if i % 2 == 0 else 'falso',
+        texto_ayuda='<p>Recuerda evaluar cada combinación de valores.</p>',
+        retroalimentacion_correcta='<p>¡Correcto! ✓</p>',
+        retroalimentacion_incorrecta='<p>Revisa el procedimiento de construcción de tablas.</p>'
+    )
+
+    if i % 2 == 0:
+        ej = Ejercicio.objects.get(tema=tema2_1, orden=i)
+        OpcionMultiple.objects.create(ejercicio=ej, letra='A', texto='Verdadero')
+        OpcionMultiple.objects.create(ejercicio=ej, letra='B', texto='Falso')
+        OpcionMultiple.objects.create(ejercicio=ej, letra='C', texto='Depende de los valores')
+        OpcionMultiple.objects.create(ejercicio=ej, letra='D', texto='No se puede determinar')
+
+print(f"    ✓ Tema 2.1 creado con {tema2_1.contenidos.count()} contenidos y {tema2_1.ejercicios.count()} ejercicios")
+print(f"  ✅ Lección 2 completada")
+print()
+
+# ================================================================================================
+# RESUMEN FINAL
+# ================================================================================================
+print("=" * 80)
+print("✅ ¡Contenido educativo cargado exitosamente!")
+print()
+print("📊 RESUMEN:")
+print(f"  - Lecciones creadas: {Leccion.objects.count()}")
+print(f"  - Temas creados: {Tema.objects.count()}")
+print(f"  - Contenidos creados: {ContenidoTema.objects.count()}")
+print(f"  - Ejercicios creados: {Ejercicio.objects.count()}")
+print(f"  - Opciones múltiples creadas: {OpcionMultiple.objects.count()}")
+print()
+print("=" * 80)
+print("📖 Para ver el contenido, accede a:")
+print("   - Panel de administración: http://localhost:8000/admin/")
+print("   - Frontend: http://localhost:5173/")
+print("=" * 80)

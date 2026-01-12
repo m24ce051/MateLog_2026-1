@@ -1,0 +1,361 @@
+.exam-container {
+  min-height: 100vh;
+  background: #ffffff;
+  padding: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.exam-header {
+  background: white;
+  border: 2px solid transparent;
+  border-image: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) 1;
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 0.75rem;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(245, 87, 108, 0.15);
+  text-align: center;
+}
+
+.exam-header h1 {
+  color: #f5576c;
+  margin: 0 0 0.75rem 0;
+  font-size: 1.75rem;
+}
+
+.exam-instrucciones {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Tarjeta de pregunta individual */
+.pregunta-card {
+  background: white;
+  border: 2px solid transparent;
+  border-image: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) 1;
+  border-radius: 10px;
+  padding: 1.25rem;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(245, 87, 108, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pregunta-numero-badge {
+  background: #f5576c;
+  color: white;
+  padding: 0.35rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.pregunta-texto {
+  font-size: 1.15rem;
+  color: #333;
+  line-height: 1.4;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Contenedor de opciones */
+.opciones-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+/* Contenedor de respuesta abierta */
+.respuesta-abierta-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.respuesta-abierta-textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  line-height: 1.5;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+  min-height: 150px;
+}
+
+.respuesta-abierta-textarea:focus {
+  outline: none;
+  border-color: #f5576c;
+  background: #fff5f7;
+}
+
+.respuesta-abierta-textarea::placeholder {
+  color: #9ca3af;
+}
+
+.textarea-helper {
+  font-size: 0.85rem;
+  color: #6b7280;
+  text-align: right;
+}
+
+.opcion-radio {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.opcion-radio:hover {
+  border-color: #f5576c;
+  background: #fff5f7;
+  transform: translateX(5px);
+}
+
+.opcion-radio.selected {
+  border-color: #f5576c;
+  background: #ffe6ea;
+  box-shadow: 0 2px 8px rgba(245, 87, 108, 0.15);
+  transform: translateX(5px);
+}
+
+/* Ocultar el radio button nativo */
+.opcion-radio input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+  cursor: pointer;
+  position: relative;
+  background: white;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.opcion-radio input[type="radio"]:checked {
+  border-color: #f5576c;
+  background: #f5576c;
+}
+
+.opcion-letra {
+  font-weight: 700;
+  color: #f5576c;
+  margin-right: 0.5rem;
+  min-width: 25px;
+}
+
+.opcion-texto {
+  font-size: 1.05rem;
+  color: #333;
+  flex: 1;
+  font-weight: 500;
+}
+
+/* Sección inferior con botón y progreso */
+.bottom-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  align-items: center;
+  margin-top: 0.025rem;
+  padding-top: 0.075rem;
+  border-top: 2px solid #f3f4f6;
+}
+
+/* Botón de siguiente */
+.next-button {
+  background: #f5576c;
+  color: white;
+  border: none;
+  padding: 0.5rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(245, 87, 108, 0.2);
+}
+
+.next-button:hover:not(:disabled) {
+  background: #e0445a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
+}
+
+.next-button:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.progress-indicator {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+/* Estados de carga y error */
+.loading {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+}
+
+/* Resultados del examen */
+.exam-results {
+  background: white;
+  border: 2px solid #f5576c;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(245, 87, 108, 0.15);
+  text-align: center;
+}
+
+.exam-results h1 {
+  color: #f5576c;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.75rem;
+}
+
+.results-summary {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.result-label {
+  font-size: 1.1rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.result-value {
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: 700;
+}
+
+.result-value.score {
+  font-size: 2rem;
+  color: #f5576c;
+}
+
+.results-message {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin: 1.5rem 0;
+}
+
+.continue-button {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 2.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(245, 87, 108, 0.2);
+}
+
+.continue-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .exam-container {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .exam-header {
+    padding: 1rem;
+  }
+
+  .exam-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .exam-instrucciones {
+    font-size: 0.9rem;
+  }
+
+  .pregunta-card {
+    padding: 1.25rem;
+  }
+
+  .pregunta-texto {
+    font-size: 1.05rem;
+  }
+
+  .opcion-texto {
+    font-size: 0.95rem;
+  }
+
+  .next-button {
+    padding: 0.75rem 0.2rem;
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  .exam-results {
+    padding: 1.5rem;
+  }
+
+  .exam-results h1 {
+    font-size: 1.4rem;
+  }
+
+  .result-value.score {
+    font-size: 1.5rem;
+  }
+
+  .continue-button {
+    padding: 0.75rem 0.2rem;
+    font-size: 1rem;
+    width: 100%;
+  }
+}

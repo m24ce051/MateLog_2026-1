@@ -1,0 +1,507 @@
+.lesson-detail-container {
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+
+
+
+.lesson-detail-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 40px 20px;
+  position: relative;
+}
+
+
+
+
+.back-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  transition: background 0.3s;
+}
+
+
+
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+
+
+
+.lesson-detail-header h1 {
+  margin: 0 0 15px 0;
+  font-size: 2.5rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+
+.lesson-detail-header p {
+  font-size: 1.1rem;
+  opacity: 0.95;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+
+.topics-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+
+
+
+.topics-content h2 {
+  font-size: 2rem;
+  color: #333;
+  margin: 0 0 30px 0;
+}
+
+
+
+
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+
+
+
+.topic-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 3px solid transparent;
+  position: relative;
+}
+
+
+
+
+.topic-card:hover:not(.locked) {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+/* Estados de color */
+.topic-card.topic-grey {
+  border: 0.9px #9e9e9e;
+  box-shadow: 0 2px 8px #9e9e9e;
+}
+
+
+
+
+.topic-card.topic-blue {
+  border: 0.9px #5da5e0;
+  box-shadow: 0 2px 8px #5da5e0;
+}
+
+
+
+
+
+
+
+
+.topic-card.topic-green {
+  border: 0.9px #4caf50;
+  box-shadow: 0 2px 8px #4caf50;
+}
+
+
+
+
+.topic-card.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+  /*border-color: #9e9e9e; Gris cuando está bloqueado */
+}
+
+
+
+
+.lock-overlay {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.5rem;
+}
+
+
+
+
+.topic-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+
+
+
+.topic-number {
+  background: #667eea;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid #e0e0e0;
+}
+
+
+
+
+.topic-status {
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+
+
+
+.topic-status.sin_iniciar {
+  background: #e0e0e0;
+  color: #666;
+}
+
+
+
+
+.topic-status.iniciado {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+
+
+
+.topic-status.completado {
+  background: #e8f5e9;
+  color: #388e3c;
+}
+
+
+
+
+.topic-card h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin: 0 0 10px 0;
+}
+
+
+
+
+/* Descripción con HTML */
+.topic-description {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0 0 15px 0;
+  line-height: 1.6;
+}
+
+
+
+
+
+
+
+
+/* NUEVO: Sección de progreso de contenido */
+.progress-section {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+
+
+
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+
+
+
+.progress-percentage {
+  font-weight: 600;
+  color: #667eea;
+}
+
+
+
+
+.progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+
+
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* NUEVO: Mensaje de ejercicios pendientes */
+.exercises-pending-message {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: #fff3cd;
+  border-left: 4px solid #ffc107;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #856404;
+  display: flex;
+  align-items: center;
+}
+.exercises-pending-message span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+
+/* NUEVO: Sección de calificación de ejercicios */
+.score-section {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+
+
+
+
+.score-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+
+
+
+.score-percentage {
+  font-weight: 600;
+  color: #4caf50;
+}
+
+
+
+
+.score-bar-container {
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+
+
+
+.score-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+
+
+
+.score-bar-fill.approved {
+  background: linear-gradient(90deg, #4caf50 0%, #66bb6a 100%);
+}
+
+
+
+
+.score-bar-fill.not-approved {
+  background: linear-gradient(90deg, #ff9800 0%, #ffa726 100%);
+}
+
+
+
+
+.topic-attempts {
+  font-size: 0.75rem;
+  color: #999;
+  font-style: italic;
+}
+
+
+
+
+/*
+
+
+
+
+.topic-card p {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0 0 15px 0;
+  line-height: 1.5;
+}
+
+
+
+
+.topic-score {
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+  color: #667eea;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+
+
+
+*/
+
+
+
+
+.back-btn {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 20px auto;
+  display: block;
+}
+
+
+
+
+.back-btn:hover {
+  background: #5568d3;
+}
+
+
+
+
+/*
+
+
+
+
+.no-topics {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+  font-size: 1.1rem;
+}
+
+
+
+
+.error-box {
+  background: #fee;
+  border: 1px solid #fcc;
+  color: #c33;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 40px auto;
+  max-width: 600px;
+}
+
+
+
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+
+
+
+*/
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+  .topics-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+
+
+  .lesson-detail-header h1 {
+    font-size: 2rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+

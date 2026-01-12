@@ -1,0 +1,249 @@
+.autoeficacia-container {
+  min-height: 100vh;
+  background: #ffffff;
+  padding: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.autoeficacia-header {
+  background: white;
+  border: 2px solid #d97706;
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 0.75rem;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.15);
+  text-align: center;
+}
+
+.autoeficacia-header h1 {
+  color: #d97706;
+  margin: 0 0 0.75rem 0;
+  font-size: 1.75rem;
+}
+
+.autoeficacia-instrucciones {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Tarjeta de pregunta individual */
+.question-card {
+  background: white;
+  border: 2px solid #d97706;
+  border-radius: 10px;
+  padding: 1.25rem;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.question-number-badge {
+  background: #d97706;
+  color: white;
+  padding: 0.35rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.question-text {
+  font-size: 1.15rem;
+  color: #333;
+  line-height: 1.4;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Contenedor de opciones */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.options-label {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+  margin: 0 0 0.035rem 0;
+  text-align: center;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.option-item:hover {
+  border-color: #d97706;
+  background: #fef3c7;
+  transform: translateX(5px);
+}
+
+.option-item.selected {
+  border-color: #d97706;
+  background: #fef3c7;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.15);
+  transform: translateX(5px);
+}
+
+/* Ocultar el radio button nativo */
+.option-item input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  margin-right: 1rem;
+  cursor: pointer;
+  position: relative;
+  background: white;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.option-item input[type="radio"]:checked {
+  border-color: #d97706;
+  background: #d97706;
+}
+
+.option-label {
+  font-size: 1.05rem;
+  color: #333;
+  flex: 1;
+  font-weight: 500;
+}
+
+/* Sección inferior con botón y progreso */
+.bottom-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  align-items: center;
+  margin-top: 0.025rem;
+  padding-top: 0.075rem;
+  border-top: 2px solid #f3f4f6;
+}
+
+/* Botón de siguiente */
+.autoeficacia-container .next-button {
+  background: #d97706;
+  color: white;
+  border: none;
+  padding: 0.5rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.2);
+}
+
+.autoeficacia-container .next-button:hover:not(:disabled) {
+  background: #b45309;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+}
+
+.next-button:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.progress-indicator {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+/* Estados de carga y error */
+.loading,
+.error-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+}
+
+.error-box {
+  color: #dc2626;
+  margin-bottom: 1rem;
+}
+
+.retry-button {
+  background: #d97706;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 1rem;
+}
+
+.retry-button:hover {
+  background: #b45309;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .autoeficacia-container {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .autoeficacia-header {
+    padding: 1rem;
+  }
+
+  .autoeficacia-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .autoeficacia-instrucciones {
+    font-size: 0.9rem;
+  }
+
+  .question-card {
+    padding: 1.25rem;
+  }
+
+  .question-text {
+    font-size: 1.05rem;
+  }
+
+  .option-label {
+    font-size: 0.95rem;
+  }
+
+  .next-button {
+    padding: 0.75rem 0.2rem;
+    font-size: 1rem;
+    width: 100%;
+  }
+}

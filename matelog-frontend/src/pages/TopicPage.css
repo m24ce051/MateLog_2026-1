@@ -1,0 +1,515 @@
+/* TopicPage.css */
+
+
+.topic-container {
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+/* Forzar color morado para radio buttons en toda la página de temas */
+.topic-container input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 18px !important;
+  height: 18px !important;
+  border: 2px solid #d1d5db !important;
+  border-radius: 50% !important;
+  outline: none !important;
+  cursor: pointer !important;
+  position: relative !important;
+  background: white !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.topic-container input[type="radio"]:checked {
+  border-color: #667eea !important;
+  background: #667eea !important;
+}
+
+
+.topic-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+}
+
+.topic-header-content {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+
+.topic-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: right;
+  flex: 1;
+}
+
+
+.content-box, .exercise-box {
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* NUEVO: Header del contenido con badge y botón inline */
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+
+.content-type-badge {
+  display: inline-block;
+  background: #667eea;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+
+/* NUEVO: Header del ejercicio */
+.exercise-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+
+.exercise-info-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.content-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+
+.content-image, .exercise-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+
+.navigation-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+
+.btn {
+  padding: 14px 32px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+
+/* NUEVO: Botones inline (dentro de los recuadros) - más pequeños */
+.btn-inline {
+  padding: 8px 16px;
+  font-size: 0.95rem;
+}
+
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+
+.btn-secondary {
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+}
+
+
+.btn-secondary:hover {
+  background: #f0f4ff;
+}
+
+
+/* Botón "Ir a Ejercicios" - FIX: Mismos colores que "Ver Otro Ejemplo" */
+.btn-accent {
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.btn-accent:hover {
+  background: #f0f4ff;
+}
+
+
+/* Botón "Regresar" */
+.btn-back {
+  background: white;
+  color: #666;
+  border: 2px solid #ddd;
+}
+
+
+.btn-back:hover {
+  background: #f9f9f9;
+  border-color: #999;
+}
+
+
+/* NUEVO: Botón "Ver Ayuda" - estilo amarillo */
+.btn-help {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  color: #856404;
+}
+
+
+.btn-help:hover {
+  background: #ffe69c;
+}
+
+
+/* Botón "Volver" en el header */
+.back-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(10px);
+}
+
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+.progress-indicator {
+  text-align: center;
+  color: #666;
+  font-size: 1rem;
+  margin: 20px 0;
+}
+
+
+/* Info de progreso de ejercicios */
+.exercise-progress-info {
+  background: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  padding: 15px 20px;
+  margin: 20px auto;
+  max-width: 900px;
+  border-radius: 8px;
+  color: #1565c0;
+  font-size: 1rem;
+  text-align: center;
+}
+
+
+.exercise-progress-info span {
+  display: block;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+
+.exercise-number {
+  display: inline-block;
+  background: #667eea;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+
+.exercise-difficulty {
+  display: inline-block;
+  background: #e8f5e9;
+  color: #388e3c;
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+}
+
+
+.exercise-instruction {
+  font-size: 1.1rem;
+  color: #555;
+  margin: 20px 0;
+  padding: 15px;
+  background: #f9f9f9;
+  border-left: 4px solid #667eea;
+  border-radius: 4px;
+}
+
+
+.exercise-question {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 25px 0;
+  font-weight: 500;
+}
+
+
+.options-list {
+  margin: 25px 0;
+}
+
+
+/* Estilos específicos para opciones de ejercicios */
+.exercise-box .option-item {
+  display: block;
+  padding: 15px 20px;
+  margin: 10px 0;
+  background: #f9f9f9;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+
+.exercise-box .option-item:hover {
+  border-color: #667eea;
+  background: #f0f4ff;
+}
+
+
+.exercise-box .option-item input[type="radio"] {
+  margin-right: 12px;
+  accent-color: #667eea !important;
+}
+
+
+/* Asegurar que los radio buttons de ejercicios usen color morado */
+.exercise-box .option-item input[type="radio"]:checked {
+  accent-color: #667eea !important;
+}
+
+/* Forzar color morado en todos los estados */
+.exercise-box input[type="radio"] {
+  accent-color: #667eea !important;
+}
+
+.exercise-box input[type="radio"]:checked {
+  accent-color: #667eea !important;
+}
+
+
+.answer-input {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  margin: 20px 0;
+  transition: border-color 0.3s;
+}
+
+
+.answer-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+
+.help-box {
+  background: #fff3cd;
+  border-left: 4px solid #ffc107;
+  padding: 15px 20px;
+  margin: 15px 0;
+  border-radius: 4px;
+  color: #856404;
+}
+
+
+/* FIX: Ayuda automática también amarilla */
+.help-box-auto {
+  background: #fff3cd;
+  border-left: 4px solid #ffc107;
+  color: #856404;
+}
+
+
+.help-box-auto h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #856404;
+  font-size: 1rem;
+}
+
+
+.submit-btn {
+  width: 100%;
+  margin-top: 20px;
+}
+
+
+.result-box {
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+
+.result-box.correct {
+  background: #d4edda;
+  border: 2px solid #28a745;
+  color: #155724;
+}
+
+
+/* FIX: Resultado incorrecto en tonos grises */
+.result-box.incorrect {
+  background: #f5f5f5;
+  border: 2px solid #9e9e9e;
+  color: #424242;
+}
+
+
+.result-box h3 {
+  margin-top: 0;
+  font-size: 1.3rem;
+}
+
+
+.result-box .feedback {
+  margin-top: 10px;
+  font-style: italic;
+}
+
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+
+.error-box {
+  background: #fee;
+  border: 1px solid #fcc;
+  color: #c33;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 40px auto;
+  max-width: 600px;
+}
+
+
+/* Responsive: mantener botones inline alineados en móvil */
+@media (max-width: 768px) {
+  .topic-header {
+    padding: 16px;
+  }
+
+  .topic-header-content {
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  .topic-header h1 {
+    font-size: 1.3rem;
+    text-align: right;
+  }
+
+  .back-btn {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .content-box, .exercise-box {
+    padding: 25px 20px;
+    margin: 25px auto;
+  }
+
+  .content-header,
+  .exercise-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .content-type-badge,
+  .exercise-info-left {
+    flex-shrink: 0;
+  }
+
+  .btn-inline {
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: 0.85rem;
+    padding: 7px 12px;
+  }
+
+  .navigation-buttons {
+    gap: 10px;
+  }
+
+  .btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+}
+
+
+
