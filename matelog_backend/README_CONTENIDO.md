@@ -37,7 +37,7 @@ matelog_backend/
 
 ---
 
-## 🚀 Cómo Usar el Archivo de Contenido
+## Cómo Usar el Archivo de Contenido
 
 ### Opción 1: Cargar el contenido (Recomendado)
 
