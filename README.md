@@ -1,6 +1,7 @@
 # MateLog - Ambiente Inteligente de Aprendizaje para enseñar Lógica Matemática
 
-Plataforma web para aprendizaje de lógica matemática con sistema de progreso y tracking.
+Esta plataforma web está diseñada para apoyar el aprendizaje de lógica matemática en estudiantes de nivel medio superior. Al ingresar por primera vez, los usuarios completan un cuestionario de personalidad y un examen diagnóstico que permite identificar sus conocimientos iniciales. Durante el curso, el sistema registra de manera continua el progreso y las actividades realizadas, generando información valiosa para su análisis. Con base en estos datos, se diseñan lecciones personalizadas y contenidos adaptables, ajustados al perfil y las necesidades de cada alumno. Al concluir el curso, los estudiantes responden nuevamente el cuestionario de personalidad y realizan un examen final, con el propósito de evaluar el conocimiento adquirido y medir su avance.
+
 
 ## Stack por realizar
 
