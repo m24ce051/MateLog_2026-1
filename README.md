@@ -15,7 +15,7 @@ Esta plataforma web está diseñada para apoyar el aprendizaje de lógica matem�
 ```bash
 cd matelog_backend
 python -m venv venv
-source venv\Scripts\activate
+venv\Scripts\activate
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py createsuperuser
